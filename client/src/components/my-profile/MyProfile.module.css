@@ -1,0 +1,194 @@
+.profile{
+    margin-top: 150px;
+    color: #31373a;
+    font-size: 13px;
+    font-weight: 700;
+}
+.session-title {
+    padding: 30px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+.session-title h2 {
+    width: 100%;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+}
+.show {
+    display: block; /* Hidden by default */
+    position: fixed; /* Sit on top of the page content */
+    
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+.no-added{
+    text-align: center;
+}
+.buttonAdd{
+    margin-top: 30px;
+}
+.session-title p {
+    text-align: center;
+    float: none;
+    margin: auto;
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+.heading-line {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    border: 1px solid #fe9c2c;
+    margin: 0 auto;
+    position: relative;
+}
+.heading-line::before {
+    content: "";
+    height: 2px;
+    width: 60px;
+    background-color: #e5e5e5;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 6px;
+}
+.heading-line::after {
+    content: "";
+    height: 2px;
+    width: 60px;
+    background-color: #e5e5e5;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 7px;
+}
+.about-us .about-row .image-col {
+    text-align: center;
+}
+.image-col img {
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    background-color: #fff;
+    padding: 10px;
+    width: 90%;
+    max-height: 300px;
+    object-fit: cover;
+}
+.about-us .about-row .image-col img {
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    background-color: #fff;
+    padding: 10px;
+    width: 90%;
+}
+.about-us .about-row .image-col .btn {
+    margin-top: 40px;
+    width: 90%;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.about-us .about-row .detail-col h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    
+}
+h2{
+    padding: 0;
+}
+.about-us .about-row .detail-col h6 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.about-us .about-row .detail-col p {
+    font-size: .94rem;
+    line-height: 30px;
+}
+
+.services {
+    padding: 50px;
+    background-color: #F9F9F9;
+}
+.services .services-row .seric-div .service-card {
+    background-color: #FFF;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 62px 0px rgb(0 0 0 / 6%);
+}
+.services .services-row .seric-div .service-card i {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 46px;
+    background-color: #fe9c2c;
+    color: #fff;
+    border-radius: 25px;
+    border-bottom-right-radius: 0;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+.fa-file-image:before {
+    content: "\f1c5";
+}
+.services .services-row .seric-div .service-card h4 {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+.services .services-row .seric-div .service-card p {
+    font-size: .95rem;
+    margin-top: 15px;
+}
+.signin {
+    top: 75px;
+    /* width: 50%; */
+    position: absolute;
+    /* max-height: 90vh; */
+    left: 0;
+    right: 0;
+    /* margin: auto; */
+    border-radius: 20px;
+    background-color: white;
+    /* padding: 1rem;i */
+    box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+    z-index: 30;
+    margin-top: 50px;
+}
+.form-section{
+    padding-top: 20px !important
+}
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+  }

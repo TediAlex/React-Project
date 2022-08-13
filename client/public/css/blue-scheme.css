@@ -313,7 +313,7 @@ a.menu-toggle-btn i {
 .dark-content {
   background-color: #31373a;
   width: 100%;
-  padding: 70px 0 80px 0;
+  padding: 40px 0;
 }
 .dark-content .section-header .section-title {
   color: white;
@@ -323,7 +323,7 @@ a.menu-toggle-btn i {
 }
 
 .section-header {
-  padding-bottom: 70px;
+  /* padding-bottom: 70px; */
   text-align: center;
 }
 .section-header .section-title {
@@ -545,6 +545,9 @@ blockquote {
   margin: 0 50px 0 0;
   font-size: 16px;
 }
+.pull-left img{
+  width: 40%;
+}
 
 /*------------------------------------------------------
 	Services Styling 
@@ -578,7 +581,9 @@ blockquote {
   display: none;
   opacity: 0;
 }
-
+.products-container {
+  padding: 50px 0;
+}
 #filters {
   margin: 100px 0 60px 0;
 }
@@ -681,6 +686,7 @@ blockquote {
   display: block;
   position: relative;
   overflow: hidden;
+  margin: 20px 0;
 }
 .thumb-post .overlay {
   position: absolute;
@@ -792,7 +798,15 @@ blockquote {
 
 .project-single {
   margin-top: 100px;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
+  padding-top: 100px;
+}
+.uk-width-medium-1-2 {
+  border-bottom: 1px solid #edf0f2;
+  padding: 15px 5%;
+}
+.uk-width-medium-1-2 img{
+  margin-right: 20px;
 }
 .project-single .project-title {
   font-weight: 600;
@@ -806,14 +820,16 @@ blockquote {
 }
 .project-single .description {
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 .project-single .meta-post li {
   display: block;
   margin-bottom: 15px;
 }
-.project-single .meta-post li span {
+.project-single .meta-post span {
   color: #31373a;
   margin-right: 10px;
+  margin-bottom: 15px;
 }
 .project-single .meta-post li a {
   color: #777777;
@@ -940,7 +956,8 @@ blockquote {
 }
 .thumb-post img {
   width: 100%;
-  height: auto;
+    max-height: 240px;
+    object-fit: cover;
 }
 
 /*------------------------------------------------------
@@ -1283,7 +1300,7 @@ blockquote {
 
 .site-footer {
   background-color: #f1f4f5;
-  padding: 100px 0;
+  padding: 25px 0 0 0;
   color: #aaaaaa;
   font-family: "Raleway", sans-serif;
 }

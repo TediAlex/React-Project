@@ -1,10 +1,12 @@
+// Import Context
+import { UserContext } from '../../contexts/UserContext';
+// Import Services
+import * as userService from '../../services/userService';
+// Import Style
+import styles from './../login/Login.module.css';
+// Import Default
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// import * as userService from '../../services/userService';
-import { UserContext } from '../../contexts/UserContext';
-
-import styles from './../login/Login.module.css';
 
 export const Registration = () => {
   const navigate = useNavigate();
@@ -25,31 +27,18 @@ export const Registration = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  // const email = registrationData.email
-  // const password = registrationData.password
-  const userLoginData = {
+  const userRegData = {
     email: registrationData.email,
     username: registrationData.username,
     password: registrationData.password,
   };
-  // const [userData, setUserData] = useState({});
   const registrationHandler = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3030/users/register', {
-      method: 'POST',
-      headers: {
-        // 'X-Authorization': `${user.accessToken}`,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userLoginData),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        navigate('/');
-        userLogin(result);
-      });
+    userService.registration(userRegData).then((result) => {
+      navigate('/');
+      userLogin(result);
+    });
   };
-  // console.log(userData)
   return (
     <div className={styles['signin']}>
       <div className={styles['back-img']}>
@@ -59,7 +48,6 @@ export const Registration = () => {
         <div className={styles['layer']}></div>
         <p className={styles['point']}>&#9650;</p>
       </div>
-
       <form onSubmit={registrationHandler}>
         <div className={styles['form-section']}>
           <div
@@ -142,10 +130,7 @@ export const Registration = () => {
               Minimum 8 characters
             </span>
           </div>
-
-      
         </div>
-
         <button
           className={
             styles[

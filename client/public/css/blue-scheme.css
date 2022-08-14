@@ -217,9 +217,11 @@ a, a:visited {
 .main-nav ul li a i {
   margin-left: 7px;
 }
-.main-nav ul li.active a {
+.main-nav ul .active {
   color: #00a8d6;
   background-color: #f1f4f5;
+  /* padding-left: 25px; */
+  /* color: #fff; */
 }
 .main-nav ul li ul {
   display: none;
@@ -727,7 +729,7 @@ blockquote {
   bottom: 30px;
   left: 30px;
 }
-.portfolio-infos a {
+.portfolio-infos span {
   color: white;
 }
 .portfolio-infos .portfolio-title {
@@ -959,7 +961,13 @@ blockquote {
     max-height: 240px;
     object-fit: cover;
 }
-
+.edit-button{
+  margin-top: 50px;
+  width: 100%;
+}
+.edit-button a{
+  color: #ffffff;
+}
 /*------------------------------------------------------
 	Blog Styling 
 --------------------------------------------------------*/

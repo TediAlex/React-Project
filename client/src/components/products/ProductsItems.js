@@ -1,6 +1,5 @@
+// Import Default
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { ProductContext } from './../../contexts/ProductContext';
 export const ProductsItems = ({ title,  category,  imageUrl, productId }) => {
   return (
     <div className="item col-md-4">
@@ -11,9 +10,9 @@ export const ProductsItems = ({ title,  category,  imageUrl, productId }) => {
             <div className="portfolio-infos">
               <span className="meta-category">{category}</span>
               <h3 className="portfolio-title">
-                <a className="fancybox" >
+                <span className="fancybox" >
                   {title}
-                </a>
+                </span>
               </h3>
             </div>
           </div>

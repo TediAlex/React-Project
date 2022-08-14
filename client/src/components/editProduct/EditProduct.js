@@ -2,51 +2,52 @@
 import { UserContext } from '../../contexts/UserContext';
 // Import Setvices
 import * as productService from './../../services/productService'
-// Import Styles
-import styles from './../login/Login.module.css';
 // Import Default
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-export const CreateProduct = () => {
+import styles from './../login/Login.module.css';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+export const EditProduct = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const [newProduct, setNewProduct] = useState({
-    title: '',
-    category: 'rent',
-    imageUrl: '',
-    description: '',
-    year: '',
-    capacity: '',
-    cabins: '',
-    engine: '',
-  });
+  const { productId } = useParams();
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    productService.getOne(productId, user.accessToken)
+      .then((result) => {
+        setProduct(result);
+      });
+  }, [productId, user.accessToken]);
+
   const onChange = (e) => {
-    setNewProduct((state) => ({
+    setProduct((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
-  };  
-  const addNewProductHandler = (e) => {
+  };
+  const EditProductionHandler = (e) => { 
     e.preventDefault();
-    productService.create(newProduct, user.accessToken)
-      .then((result) => {
-        navigate('/products');
-      })
+    productService.editProduct(product._id, user.accessToken,product)
+    .then(result => {
+      navigate(`/products/${product._id}`);
+    })
       .catch(() => {
         navigate('/404');
       });
-  };
+  }
 
   return (
     <div className={styles['signin']}>
       <div className={styles['back-img']}>
         <div className={styles['sign-in-text']}>
-          <h2 className={styles['active']}>Create New Yacht</h2>
+          <h2 className={styles['active']}>Edit Yacht</h2>
         </div>
         <div className={styles['layer']}></div>
         <p className={styles['point']}>&#9650;</p>
       </div>
-      <form onSubmit={addNewProductHandler}>
+
+      <form onSubmit={EditProductionHandler}>
         <div className={styles['form-section']}>
           <div
             className={
@@ -61,7 +62,7 @@ export const CreateProduct = () => {
               type="text"
               id="title"
               name="title"
-              value={newProduct.title}
+              value={product.title}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -76,7 +77,7 @@ export const CreateProduct = () => {
               id="category"
               className={styles['mdl-textfield__input']}
               onChange={onChange}
-              value={newProduct.category}
+              value={product.category}
             >
               <option value="rent">Rent</option>
               <option value="buy">Buy</option>
@@ -95,7 +96,7 @@ export const CreateProduct = () => {
               type="text"
               id="imageUrl"
               name="imageUrl"
-              value={newProduct.imageUrl}
+              value={product.imageUrl}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -112,10 +113,10 @@ export const CreateProduct = () => {
             <label htmlFor="description">Add Yaht Description</label>
             <textarea
               className={styles['mdl-textfield__input']}
-              type="password"
+              type="text"
               id="description"
               name="description"
-              value={newProduct.description}
+              value={product.description}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -136,7 +137,7 @@ export const CreateProduct = () => {
               type="number"
               id="year"
               name="year"
-              value={newProduct.year}
+              value={product.year}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -156,7 +157,7 @@ export const CreateProduct = () => {
               type="number"
               id="capacity"
               name="capacity"
-              value={newProduct.capacity}
+              value={product.capacity}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -176,7 +177,7 @@ export const CreateProduct = () => {
               type="number"
               id="cabins"
               name="cabins"
-              value={newProduct.cabins}
+              value={product.cabins}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -196,7 +197,7 @@ export const CreateProduct = () => {
               type="text"
               id="engine"
               name="engine"
-              value={newProduct.engine}
+              value={product.engine}
               onChange={onChange}
             />
             <span className={styles['mdl-textfield__error']}>
@@ -211,7 +212,7 @@ export const CreateProduct = () => {
             ]
           }
         >
-          Add Yacht
+          Edit Yacht
         </button>
       </form>
     </div>

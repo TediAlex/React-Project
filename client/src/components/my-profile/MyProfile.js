@@ -1,13 +1,13 @@
 import styles from './MyProfile.module.css';
 import '../../css/forms.css';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ProductContext } from './../../contexts/ProductContext';
+// import { useNavigate } from 'react-router-dom';
+// import { ProductContext } from './../../contexts/ProductContext';
 import { ProductsItems } from './../products/ProductsItems';
 import { UserContext } from './../../contexts/UserContext';
 
 export const MyProfile = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [prodyctsByOwner, setProdyctsByOwner] = useState({});
   const [addInUser, setAddInUser] = useState({
     description: '',
@@ -106,7 +106,7 @@ export const MyProfile = () => {
         </div>
         <div className={`${styles['about-row']} row`}>
           <div className={`${styles['image-col']} col-md-4`}>
-            <img src={addInUser.imageUrl ? addInUser.imageUrl : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg'} />
+            <img alt="profileImage"  src={addInUser.imageUrl ? addInUser.imageUrl : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg'} />
             
             {!isEmpty 
             ? (<button

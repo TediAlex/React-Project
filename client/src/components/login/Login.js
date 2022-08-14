@@ -1,9 +1,12 @@
+// Import Setvices
+import * as userService from './../../services/userService';
+// Import Context
+import { UserContext } from '../../contexts/UserContext';
+// Import Default
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 
-import * as userService from './../../services/userService';
-import { UserContext } from '../../contexts/UserContext';
 export const Login = () => {
     const { userLogin } = useContext(UserContext);
   const navigate = useNavigate();
@@ -11,7 +14,6 @@ export const Login = () => {
     email: '',
     password: '',
   });
-//   const [userData, setUserData] = useState({});
   const onChange = (e) => {
     setLoginData((state) => ({
       ...state,
@@ -20,7 +22,6 @@ export const Login = () => {
   };
   const loginSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(loginData);
     userService.login(loginData.email, loginData.password)
       .then((result) => {
         console.log(result);
@@ -77,7 +78,7 @@ export const Login = () => {
               type="password"
               id="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               value={loginData.password}
               onChange={onChange}
             />

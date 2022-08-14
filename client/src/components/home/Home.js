@@ -1,32 +1,19 @@
+// Import Components
 import { ProductsItems } from '../products/ProductsItems';
 import { TeamList } from '../team/TeamList';
-
-import { useEffect, useState, useContext } from 'react';
-// import { Products } from '../products/neProducts';
+// Import Setvices
 import * as productService from './../../services/productService';
-import { ProductContext } from './../../contexts/ProductContext';
-import { UserContext } from './../../contexts/UserContext';
-
+// Import Default
+import { useEffect, useState } from 'react';
 
 export const Home = () => {
-  const { user } = useContext(UserContext);
-  // const { products, limitProductsForHome } = useContext(ProductContext);  
   const [productsListOf, setProductsListOf] = useState([]);
-  console.log(user);  useEffect(() => {
-    fetch('http://localhost:3030/data/products?pageSize=3',{
-      method:"GET",
-      headers: {
-        // 'X-Authorization': `${user.accessToken}`,
-                    'content-type': 'application/json'
-                }
-    })
-    .then(response => response.json())
+  useEffect(() => {
+    productService.getproductsForHome()
     .then(result => {
-      console.log(result)
       setProductsListOf(result)
     })
 }, []);
-
   return (
     <>
       <section id="homeIntro" className="parallax first-widget">
@@ -48,7 +35,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="dark-content ">
         <div className="container">
           <div className="row">
@@ -62,7 +48,6 @@ export const Home = () => {
             </div>
           </div>
         </div>
-        {/* <Products /> */}
         <div className="container">
           <div className="row">
             {productsListOf.length > 0 &&
@@ -78,7 +63,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
       <TeamList />
     </>
   );

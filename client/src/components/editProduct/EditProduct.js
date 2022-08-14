@@ -11,7 +11,7 @@ export const EditProduct = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const { productId } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
     productService.getOne(productId, user.accessToken)
@@ -75,13 +75,33 @@ export const EditProduct = () => {
             <select
               name="category"
               id="category"
-              className={styles['mdl-textfield__input']}
-              onChange={onChange}
+              className={styles['mdl-textfield__input']}              
               value={product.category}
+              onChange={onChange}
             >
               <option value="rent">Rent</option>
               <option value="buy">Buy</option>
             </select>
+          </div>
+          <div
+            className={
+              styles[
+                'mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
+              ]
+            }
+          >
+            <label htmlFor="imageUrl">Add Price</label>
+            <input
+              className={styles['mdl-textfield__input']}
+              type="text"
+              id="price"
+              name="price"
+              value={product.price}
+              onChange={onChange}
+            />
+            <span className={styles['mdl-textfield__error']}>
+              Enter a correct Email
+            </span>
           </div>
           <div
             className={

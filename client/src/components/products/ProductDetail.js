@@ -15,8 +15,6 @@ export const ProductDetail = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [productByOwner, setProductByOwner] = useState([]);
-  // const [isActive, setIsActive] = useState(false);
-
  
   useEffect(() => {
     productService.getOne(productId)
@@ -56,6 +54,8 @@ export const ProductDetail = () => {
             <div className="project-info">
               <h3 className="project-title">{product.title}</h3>
               <span className="subtitle">Provide for {product.category}</span>
+              <h4 className="subtitle">Price {product.price} €</h4>
+              
               <p className="description">{product.description}</p>
               <p className="meta-post">
                 <span>Date:</span>

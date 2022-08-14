@@ -13,6 +13,7 @@ export const CreateProduct = () => {
   const [newProduct, setNewProduct] = useState({
     title: '',
     category: 'rent',
+    price: '',
     imageUrl: '',
     description: '',
     year: '',
@@ -89,6 +90,26 @@ export const CreateProduct = () => {
               ]
             }
           >
+            <label htmlFor="imageUrl">Add Price</label>
+            <input
+              className={styles['mdl-textfield__input']}
+              type="text"
+              id="price"
+              name="price"
+              value={newProduct.price}
+              onChange={onChange}
+            />
+            <span className={styles['mdl-textfield__error']}>
+              Enter a correct Email
+            </span>
+          </div>
+          <div
+            className={
+              styles[
+                'mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
+              ]
+            }
+          >
             <label htmlFor="imageUrl">Add Yacht Image</label>
             <input
               className={styles['mdl-textfield__input']}
@@ -102,6 +123,7 @@ export const CreateProduct = () => {
               Enter a correct Email
             </span>
           </div>
+          
           <div
             className={
               styles[

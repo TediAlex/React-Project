@@ -48,7 +48,7 @@ export const Footer = () => {
                             : 'inactive header-menu-link'
                         }
                       >
-                        Create Product
+                        Create Yacht
                       </NavLink>
                     </li>
                     <li>
@@ -112,7 +112,7 @@ export const Footer = () => {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <p className="copyright-text">Copyright &copy; 2084 Company Name</p>
+            <p className="copyright-text">Copyright &copy; 2022 </p>
           </div>
         </div>
       </div>

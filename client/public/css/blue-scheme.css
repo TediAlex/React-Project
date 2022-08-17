@@ -968,6 +968,51 @@ blockquote {
 .edit-button a{
   color: #ffffff;
 }
+.justify-content-center {
+  justify-content: center!important;
+  display: flex!important;
+}
+.justify-content-center {
+  background-color: #f0f2f5;
+  margin-top: 40px;
+  padding: 30px 0;
+}
+#comments h5{
+  color: #147a9e;
+  text-align: center;
+  display: block;
+  font-size: 20px;
+}
+#comments .btn-primary{
+ margin-top: 20px;
+ float: right;
+}
+#comments .mb-4 {
+  margin-bottom: 1.5rem!important;
+}
+
+
+.accordion-button {
+  background-color: #4ebced !important;
+  color: #fff !important;
+}
+.p-4 {
+  padding: 1.5rem!important;
+}
+.border {
+  border: 1px solid #dee2e6!important;
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;
+}
+.page-link.active {
+  color: #00a8d6;
+    background-color: #eeeeee;
+}
+.page-link  {
+  cursor: pointer;
+}
+.pagination > li > span {
+  color: #00a8d6;
+}
 /*------------------------------------------------------
 	Blog Styling 
 --------------------------------------------------------*/

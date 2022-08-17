@@ -11,7 +11,7 @@ export const getAll = () => {
 };
 
 export const getproductsForHome = () => {
-  return fetch(`${baseUrl}?pageSize=3`, {
+  return fetch(`${baseUrl}?pageSize=3?sortBy=_createdOn%20`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -102,7 +102,7 @@ export const getByCategory = (category) => {
 }
 export const getLastAdded = () =>{
   return fetch(
-    `http://localhost:3030/data/products?sortBy=_createdOn%20desc`,
+    `http://localhost:3030/data/products?sortBy=_createdOn%20`,
     {
       method: 'GET',
       headers: {

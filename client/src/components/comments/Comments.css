@@ -1,0 +1,77 @@
+.card-body {
+    color: #00a8d6;
+    background-color: #f1f4f5;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.card {
+    margin: 30px 0;
+}
+.card-body p {
+    font-size: 14px;
+    color: #00a8d6;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.author-info img {
+    border-radius: 25px;
+    width: 25px;
+    height: 25px;
+    margin-right: 20px;
+}
+.author-info {
+    color: #626262;
+}
+.author-info .mb-1, 
+.author-info span {
+    margin-right: 10px;
+}
+.author-info p{
+    color: #626262;
+}
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
+  .overlay.active{
+    display: block;
+    
+  }
+  .overlay.active .card-body{
+    position: absolute;
+    top: 170px;
+    left: 0;
+    right: 0;
+    width: 50%;
+    margin: 0 auto;
+    z-index: 1000;
+  }
+  .overlay.active .card-body h5 {
+    color: #147a9e;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+}
+.overlay .background-section{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    /* display: none; */
+    /* overflow: hidden; */
+    /* outline: 0; */
+    opacity: 1;
+}
+

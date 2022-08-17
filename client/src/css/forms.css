@@ -54,9 +54,13 @@
   
   /*form-section*/
   .form-section{
-    padding: 50px 0;
+    padding: 50px 0 80px 0;
     width: 60%;
     margin: auto;
+  }
+  .form-section .optional{
+    display: block;
+    font-size: 12px;
   }
   .keep-text{
     font-size: 15px;
@@ -123,11 +127,12 @@
 } */
 .mdl-textfield__error {
   color: #d50000;
-  position: absolute;
+  /* position: absolute; */
   font-size: 12px;
   margin-top: 3px;
-  visibility: hidden;
+  /* visibility: hidden; */
   display: block;
+  line-height: initial;
 }
 ::selection {
   background: #b3d4fc;

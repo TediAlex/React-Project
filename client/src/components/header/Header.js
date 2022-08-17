@@ -38,7 +38,7 @@ export const Header = () => {
                           : 'inactive header-menu-link'
                       }
                     >
-                      Portfolio
+                     Yachts
                     </NavLink>
                   </li>
                   {user.accessToken ? (
@@ -53,7 +53,7 @@ export const Header = () => {
                             : 'inactive header-menu-link'
                         }
                         >
-                          Create Product
+                          Create Yacht
                         </NavLink>
                       </li>
                       <li>

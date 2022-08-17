@@ -1,9 +1,12 @@
 // Import Components
 import { ProductsItems } from './ProductsItems';
+// import { CommentsAdd } from '../comments/CommentsAdd';
+import { CommentsList} from '../comments/CommentsList';
 // Import Context
 import { UserContext } from './../../contexts/UserContext';
 // Import Setvices
-import * as productService from './../../services/productService'
+import * as productService from './../../services/productService';
+import * as  commentsService from '../../services/commentsServices'
 // Import Default
 import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
@@ -15,16 +18,14 @@ export const ProductDetail = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [productByOwner, setProductByOwner] = useState([]);
- 
+
   useEffect(() => {
-    productService.getOne(productId)
-      .then((result) => {
-        setProduct(result);
-      });
-    productService.getRelated(user._id, user.accessToken)
-      .then((result) => {
-        setProductByOwner(result);
-      });
+    productService.getOne(productId).then((result) => {
+      setProduct(result);
+    });
+    productService.getRelated(user._id, user.accessToken).then((result) => {
+      setProductByOwner(result);
+    });
   }, [productId, user._id, user.accessToken]);
 
   const deleteHandler = () => {
@@ -32,15 +33,43 @@ export const ProductDetail = () => {
       'Are you sure you want to delete this product?'
     );
     if (confirmation) {
-      productService.remove(productId, user.accessToken)
-        .then((result) => {
-          navigate('/products');
-        });
+      productService.remove(productId, user.accessToken).then((result) => {
+        navigate('/products');
+      });
     }
   };
   const formatCreateDate = moment(product._createdOn).format(
     'dddd, MMMM DD, YYYY'
   );
+  const [addComments, setAddComments] = useState({
+    content: '',
+    user: user.email, 
+    product: productId
+  })
+  // const [comments, setComments] = useState([])
+  const [errors, setErrors] = useState({});
+  const changeHandler = (e) => {
+    setAddComments((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const submiHandler = (e) => {
+    e.preventDefault();
+    commentsService.create(addComments, user.accessToken)
+    .then((result) => { 
+      setAddComments({content:""})
+    });
+  };
+
+  const requiredField = (e) => {
+    setErrors((state) => ({
+      ...state,
+      [e.target.name]: addComments[e.target.name].length < 6,
+    }));
+  };
+  const isFormValid =  !Object.values(errors).some((x) => x);
+ 
   return (
     <>
       <div className="container">
@@ -55,7 +84,7 @@ export const ProductDetail = () => {
               <h3 className="project-title">{product.title}</h3>
               <span className="subtitle">Provide for {product.category}</span>
               <h4 className="subtitle">Price {product.price} €</h4>
-              
+
               <p className="description">{product.description}</p>
               <p className="meta-post">
                 <span>Date:</span>
@@ -68,13 +97,19 @@ export const ProductDetail = () => {
           <div className="col-md-6">
             <div className="uk-width-medium-1-2">
               <span>
-                <img src="https://www.sailmanyachting.com/images/apps/icons/year-manufacturer.png" alt="icons" />
+                <img
+                  src="https://www.sailmanyachting.com/images/apps/icons/year-manufacturer.png"
+                  alt="icons"
+                />
               </span>
               Year: {product.year}
             </div>
             <div className="uk-width-medium-1-2">
               <span>
-                <img src="https://www.sailmanyachting.com/images/apps/icons/cabins.png" alt="icons"/>
+                <img
+                  src="https://www.sailmanyachting.com/images/apps/icons/cabins.png"
+                  alt="icons"
+                />
               </span>
               Cabins: {product.cabins}
             </div>
@@ -82,37 +117,80 @@ export const ProductDetail = () => {
           <div className="col-md-6">
             <div className="uk-width-medium-1-2">
               <span>
-                <img src="https://www.sailmanyachting.com/images/apps/icons/capacity.png"  alt="icons"/>
+                <img
+                  src="https://www.sailmanyachting.com/images/apps/icons/capacity.png"
+                  alt="icons"
+                />
               </span>
               Capacity: {product.capacity}
             </div>
             <div className="uk-width-medium-1-2">
               <span>
-                <img src="https://www.sailmanyachting.com/images/apps/icons/engine.png" alt="icons"/>
+                <img
+                  src="https://www.sailmanyachting.com/images/apps/icons/engine.png"
+                  alt="icons"
+                />
               </span>
               Engine: {product.engine}
             </div>
           </div>
         </div>
-        {user._id === product._ownerId &&
-         <div className="row">
-         <div className="col-md-6">
-           <Link
-             to={`/products/${productId}/edit-product`}
-           >
-             <div className="btn btn-primary edit-button">Edit</div>
-           </Link>
-         </div>
-         <div className="col-md-6">
-           <button
-             className="btn btn-primary edit-button"
-             onClick={deleteHandler}
-           >
-             Delete
-           </button>
-         </div>
-       </div>
-        }       
+        {user._id === product._ownerId && (
+          <div className="row">
+            <div className="col-md-6">
+              <Link to={`/products/${productId}/edit-product`}>
+                <div className="btn btn-primary edit-button">Edit</div>
+              </Link>
+            </div>
+            <div className="col-md-6">
+              <button
+                className="btn btn-primary edit-button"
+                onClick={deleteHandler}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      <CommentsList productId={productId} />
+      <div className='container'>
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-8 col-lg-6">
+          <div className="shadow-0 border" id="comments">
+            <div className="card-body p-4">
+              <form onSubmit={(e) => submiHandler(e)}>
+                <h5 className="label">Add comment</h5>
+                <p className="form-outline mb-4">
+                  <textarea
+                   type="text"
+                   id="addANote"
+                   className="form-control"
+                   rows={3}
+                   placeholder="Type comment..."
+                   name="content"
+                   value={addComments.content}
+                   onChange={changeHandler}
+                   onBlur={(e) => requiredField(e)}
+                  ></textarea>
+                </p>
+                {errors.content && (
+              <span className="mdl-textfield__error">
+                Comment should be at least 6 characters long!
+              </span>
+            )}
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                  disabled={!isFormValid}
+                >
+                  Submit comment
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> 
       </div>
       <div className="related-projects">
         <div className="container">

@@ -5,6 +5,7 @@ import { TeamList } from '../team/TeamList';
 import * as productService from './../../services/productService';
 // Import Default
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const [productsListOf, setProductsListOf] = useState([]);
@@ -21,15 +22,14 @@ export const Home = () => {
           <div className="container home-intro-content">
             <div className="row">
               <div className="col-md-12">
-                <h2>Choose the Optimal Workspace for Your Business</h2>
+                <h2>A SUPERB DAY OF SAILING</h2>
                 <p>
-                  We asked six entrepreneurs with drastically different office
-                  strategies for their advice on
-                  <br /> choosing a workspace.
+                Enjoy a tailor-made cruise without worrying about transportation, timetables, luggage or booking accommodation.
+
+
                 </p>
-                <a href="/" className="large-button white-color">
-                  Download Free <i className="icon-button fa fa-download" />
-                </a>
+                <Link className="large-button white-color" to={`/products`}>Choose Yachts </Link>
+              
               </div>
             </div>
           </div>
@@ -40,10 +40,10 @@ export const Home = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="section-header">
-                <h2 className="section-title">Our Lovely Portfolio</h2>
-                <p className="section-desc">
+                <h2 className="section-title">SAILMAN TRAVEL & YACHTING</h2>
+                {/* <p className="section-desc">
                   Everything you need to create a professional website.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

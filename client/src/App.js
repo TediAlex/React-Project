@@ -10,44 +10,22 @@ import { Registration } from './components/registration/Registration';
 import { EditProduct } from './components/editProduct/EditProduct';
 import { Logout } from './components/logout/Logout';
 import { MyProfile } from './components/my-profile/MyProfile';
+import { PageNotFoundError } from './components/page-not-found/PageNotFoundError';
 // Import Context
-import { UserContext } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext';
 import { ProductContext } from './contexts/ProductContext';
 // Import Setvices
-// import * as productService from './services/productService';
 import { useLocalStorage } from './hook/useLocalStorage';
 // Import Default
 import { Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 function App() {
-  const [user, setUser] = useLocalStorage('auth', {});
-  const [products, setProducts] = useState([]);
-
-  const userLogin = (authData) => {
-    setUser(authData);
-  };
-
-  const userLogout = () => {
-    setUser({});
-  };
-
-  useEffect(() => {
-    fetch('http://localhost:3030/data/products/', {
-      method: 'GET',
-      headers: {
-        // 'X-Authorization': `${user.accessToken}`,
-        'content-type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        setProducts(result);
-      });
-  }, []);
+  const [user] = useLocalStorage('auth', {});
+  const [products] = useState([]);
+  console.log(user)
   return (
     <div>
-      <UserContext.Provider value={{ user: user, userLogin, userLogout }}>
+      <UserProvider>
         <Header />
         <ProductContext.Provider value={{ products }}>
           <Routes>
@@ -64,10 +42,11 @@ function App() {
             <Route path="/registration" element={<Registration />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/404" element={<PageNotFoundError />} />
           </Routes>
         </ProductContext.Provider>
         <Footer />
-      </UserContext.Provider>
+      </UserProvider>
     </div>
   );
 }

@@ -33,7 +33,7 @@ export const CreateProduct = () => {
     e.preventDefault();
     productService.create(newProduct, user.accessToken)
       .then((result) => {
-        navigate('/products');
+        // navigate('/products');
         setErrors({})
       })
       .catch(() => {
@@ -57,8 +57,8 @@ export const CreateProduct = () => {
     }));
   };
   console.log(newProduct)
-  const isDisabled = newProduct.isFormValid && !Object.values(errors).some((x) => x);
-  console.log(newProduct.isFormValid)
+  const isDisabled = !Object.values(errors).some((x) => x);
+  console.log(isDisabled)
   return (
     <div className='signin'>
       <div className='back-img'>

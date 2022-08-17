@@ -10,11 +10,10 @@ import { Link } from 'react-router-dom';
 export const Home = () => {
   const [productsListOf, setProductsListOf] = useState([]);
   useEffect(() => {
-    productService.getproductsForHome()
-    .then(result => {
-      setProductsListOf(result)
-    })
-}, []);
+    productService.getproductsForHome().then((result) => {
+      setProductsListOf(result);
+    });
+  }, []);
   return (
     <>
       <section id="homeIntro" className="parallax first-widget">
@@ -24,12 +23,12 @@ export const Home = () => {
               <div className="col-md-12">
                 <h2>A SUPERB DAY OF SAILING</h2>
                 <p>
-                Enjoy a tailor-made cruise without worrying about transportation, timetables, luggage or booking accommodation.
-
-
+                  Enjoy a tailor-made cruise without worrying about
+                  transportation, timetables, luggage or booking accommodation.
                 </p>
-                <Link className="large-button white-color" to={`/products`}>Choose Yachts </Link>
-              
+                <Link className="large-button white-color" to={`/products`}>
+                  Choose Yachts{' '}
+                </Link>
               </div>
             </div>
           </div>
@@ -41,9 +40,6 @@ export const Home = () => {
             <div className="col-md-12">
               <div className="section-header">
                 <h2 className="section-title">SAILMAN TRAVEL & YACHTING</h2>
-                {/* <p className="section-desc">
-                  Everything you need to create a professional website.
-                </p> */}
               </div>
             </div>
           </div>

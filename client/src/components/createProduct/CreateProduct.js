@@ -33,7 +33,7 @@ export const CreateProduct = () => {
     e.preventDefault();
     productService.create(newProduct, user.accessToken)
       .then((result) => {
-        // navigate('/products');
+        navigate('/products');
         setErrors({})
       })
       .catch(() => {

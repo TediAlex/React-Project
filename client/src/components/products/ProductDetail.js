@@ -153,7 +153,7 @@ export const ProductDetail = () => {
           </div>
         )}
       </div>
-      <CommentsList productId={productId} />
+      <CommentsList productId={productId} addComments={addComments}/>
       <div className='container'>
       <div className="row d-flex justify-content-center">
         <div className="col-md-8 col-lg-6">

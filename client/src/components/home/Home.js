@@ -1,6 +1,5 @@
 // Import Components
 import { ProductsItems } from '../products/ProductsItems';
-import { TeamList } from '../team/TeamList';
 // Import Setvices
 import * as productService from './../../services/productService';
 // Import Default
@@ -59,7 +58,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <TeamList />
     </>
   );
 };

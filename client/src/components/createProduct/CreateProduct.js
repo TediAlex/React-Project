@@ -57,7 +57,7 @@ export const CreateProduct = () => {
     }));
   };
   console.log(newProduct)
-  const isDisabled = !Object.values(errors).some((x) => x);
+  const isDisabled = Object.values(errors).some((x) => x);
   console.log(isDisabled)
   return (
     <div className='signin'>

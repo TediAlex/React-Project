@@ -26,7 +26,7 @@ export const MyProfile = () => {
     <div className={styles['profile']} > 
       <div id="services" className="services container">
         <div className={`${styles['session-title']} row`}>
-          <h2>My Added Yahts</h2>
+          <h2>My Added Yachts</h2>
           <div className={styles['heading-line']}></div>
         </div>
         <div className="row">
@@ -41,7 +41,7 @@ export const MyProfile = () => {
               />
             ))
           ) : (
-            <p className={styles['no-added']}>No Have Added Yahts</p>
+            <p className={styles['no-added']}>No Have Added Yachts</p>
           )}
         </div>
       </div>

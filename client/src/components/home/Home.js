@@ -45,16 +45,17 @@ export const Home = () => {
         </div>
         <div className="container">
           <div className="row">
-            {productsListOf.length > 0 &&
-              productsListOf.map((x) => (
+            {productsListOf.length > 0 
+            ? (productsListOf.map((x) => (
                 <ProductsItems
                   key={x._id}
                   title={x.title}
                   category={x.category}
                   imageUrl={x.imageUrl}
                   productId={x._id}
-                />
-              ))}
+                />)))
+                : <p>No have products</p>
+              }
           </div>
         </div>
       </section>

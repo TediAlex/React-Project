@@ -19,6 +19,7 @@ import { useLocalStorage } from './hook/useLocalStorage';
 // Import Default
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 function App() {
   const [user] = useLocalStorage('auth', {});
   const [products] = useState([]);
@@ -45,6 +46,7 @@ function App() {
             <Route path="/404" element={<PageNotFoundError />} />
           </Routes>
         </ProductContext.Provider>
+        <ToastContainer />
         <Footer />
       </UserProvider>
     </div>

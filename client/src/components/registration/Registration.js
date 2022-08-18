@@ -3,10 +3,12 @@ import { UserContext } from '../../contexts/UserContext';
 // Import Services
 import * as userService from '../../services/userService';
 // Import Style
-import '../../css/forms.css'; 
+import '../../css/forms.css';
 // Import Default
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Registration = () => {
   const navigate = useNavigate();
@@ -16,10 +18,6 @@ export const Registration = () => {
     username: '',
     password: '',
     confirmPassword: '',
-    dicsription: '',
-    age: '',
-    town: '',
-    phone: '',
   });
   const onChange = (e) => {
     setRegistrationData((state) => ({
@@ -34,10 +32,16 @@ export const Registration = () => {
   };
   const registrationHandler = (e) => {
     e.preventDefault();
-    userService.registration(userRegData).then((result) => {
-      navigate('/');
-      userLogin(result);
-    });
+    userService
+      .registration(userRegData)
+      .then((result) => {
+        userLogin(result);
+        toast.success('Successfully Login!');
+        navigate('/');
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
   const [errors, setErrors] = useState({});
   const validMail = (e) => {
@@ -57,44 +61,51 @@ export const Registration = () => {
     const lowerCaseLetters = /[a-z]/g;
     const upperCaseLetters = /[A-Z]/g;
     const numbers = /[0-9]/g;
-    let passValidation = false
-    if(!lowerCaseLetters.test(registrationData[e.target.name]) ||
-    !upperCaseLetters.test(registrationData[e.target.name])  ||
-    !numbers.test(registrationData[e.target.name]) ||
-    registrationData[e.target.name].length < 6){
-      passValidation = true
+    let passValidation = false;
+    if (
+      !lowerCaseLetters.test(registrationData[e.target.name]) ||
+      !upperCaseLetters.test(registrationData[e.target.name]) ||
+      !numbers.test(registrationData[e.target.name]) ||
+      registrationData[e.target.name].length < 6
+    ) {
+      passValidation = true;
     }
     setErrors((state) => ({
       ...state,
-      [e.target.name]: passValidation
+      [e.target.name]: passValidation,
     }));
   };
   const validConfirmPassword = (e) => {
-  let confirmPassValidation = false
-    if(registrationData.password !== registrationData[e.target.name]){
-      confirmPassValidation = true
+    let confirmPassValidation = false;
+    if (registrationData.password !== registrationData[e.target.name]) {
+      confirmPassValidation = true;
     }
     setErrors((state) => ({
       ...state,
-      [e.target.name]: confirmPassValidation
+      [e.target.name]: confirmPassValidation,
     }));
-  }
-  
+  };
+ 
+  const required =
+    registrationData.email.length > 0 &&
+    registrationData.username.length > 0 &&
+    registrationData.password.length > 0 &&
+    registrationData.confirmPassword.length > 0;
+  const isDisabled = required && !Object.values(errors).some((x) => x);
   return (
-    <div className='signin'>
-      <div className='back-img'>
-        <div className='sign-in-text'>
-          <h2 className='active'>Registration</h2>
+    <div className="signin">
+      <div className="back-img">
+        <div className="sign-in-text">
+          <h2 className="active">Registration</h2>
         </div>
-        <div className='layer'></div>
-        <p className='point'>&#9650;</p>
+        <div className="layer"></div>
+        <p className="point">&#9650;</p>
       </div>
       <form onSubmit={registrationHandler}>
-        <div className='form-section'>
-          <div
-            className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>
+        <div className="form-section">
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input
-              className='mdl-textfield__input'
+              className="mdl-textfield__input"
               type="email"
               id="email"
               name="email"
@@ -102,17 +113,16 @@ export const Registration = () => {
               value={registrationData.email}
               onChange={onChange}
               onBlur={(e) => validMail(e)}
-              />
-              {errors.email && (
-                <span className="mdl-textfield__error">
-                  Enter a correct Email
-                </span>
-              )}
+            />
+            {errors.email && (
+              <span className="mdl-textfield__error">
+                Enter a correct Email
+              </span>
+            )}
           </div>
-          <div
-            className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input
-              className='mdl-textfield__input'
+              className="mdl-textfield__input"
               type="text"
               id="username"
               name="username"
@@ -120,17 +130,16 @@ export const Registration = () => {
               value={registrationData.username}
               onChange={onChange}
               onBlur={(e) => validText(e, 3)}
-              />
-              {errors.price &&
-              <span className='mdl-textfield__error'>
-               Username should be at least 3 characters long!
-            </span>
-              }
+            />
+            {errors.price && (
+              <span className="mdl-textfield__error">
+                Username should be at least 3 characters long!
+              </span>
+            )}
           </div>
-          <div
-            className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input
-              className='mdl-textfield__input'
+              className="mdl-textfield__input"
               type="password"
               id="password"
               name="password"
@@ -138,17 +147,17 @@ export const Registration = () => {
               value={registrationData.password}
               onChange={onChange}
               onBlur={(e) => validPassword(e)}
-              />
-              {errors.password &&
-              <span className='mdl-textfield__error'>
-              Passwords must be at least 6 characters, minimum of 1 lower case letter and minimum of 1 numeric character.
-            </span>
-              }
+            />
+            {errors.password && (
+              <span className="mdl-textfield__error">
+                Passwords must be at least 6 characters, minimum of 1 lower case
+                letter and minimum of 1 numeric character.
+              </span>
+            )}
           </div>
-          <div
-            className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input
-              className='mdl-textfield__input'
+              className="mdl-textfield__input"
               type="password"
               id="confirm-password"
               name="confirmPassword"
@@ -156,17 +165,19 @@ export const Registration = () => {
               value={registrationData.confirmPassword}
               onChange={onChange}
               onBlur={(e) => validConfirmPassword(e)}
-              />
-              {errors.confirmPassword &&
-              <span className='mdl-textfield__error'>
-                Enter same password.
-            </span>
-              }
+            />
+            {errors.confirmPassword && (
+              <span className="mdl-textfield__error">Enter same password.</span>
+            )}
           </div>
         </div>
-        <button
-          className='sign-in-btn mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored'
-           >
+        <button 
+        disabled={!isDisabled}
+        className={!isDisabled 
+          ? "disabled sign-in-btn" 
+          : "sign-in-btn"
+        }
+        >
           Registration
         </button>
       </form>

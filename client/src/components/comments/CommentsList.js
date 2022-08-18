@@ -7,6 +7,8 @@ import * as commentsService from '../../services/commentsServices';
 import './Comments.css';
 // Import Default
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const CommentsList = ({ productId, addComments }) => {
@@ -23,6 +25,9 @@ export const CommentsList = ({ productId, addComments }) => {
   useEffect(() => {
     commentsService.gettAllForProduct(productId).then((result) => {
       setComments(result);
+    }) 
+    .catch((err) => {
+      toast.error(err);
     });
   }, [productId, addComments]);
 

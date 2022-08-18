@@ -11,6 +11,8 @@ import * as  commentsService from '../../services/commentsServices'
 import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import moment from 'moment';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ProductDetail = () => {
   const navigate = useNavigate();
@@ -22,9 +24,13 @@ export const ProductDetail = () => {
   useEffect(() => {
     productService.getOne(productId).then((result) => {
       setProduct(result);
+    }).catch((err) => {
+      toast.error(err);
     });
     productService.getRelated(user._id, user.accessToken).then((result) => {
       setProductByOwner(result);
+    }).catch((err) => {
+      toast.error(err);
     });
   }, [productId, user._id, user.accessToken]);
 
@@ -34,6 +40,7 @@ export const ProductDetail = () => {
     );
     if (confirmation) {
       productService.remove(productId, user.accessToken).then((result) => {
+        toast.success('Successfully Delete Yacht!');
         navigate('/products');
       });
     }
@@ -46,7 +53,6 @@ export const ProductDetail = () => {
     user: user.email, 
     product: productId
   })
-  // const [comments, setComments] = useState([])
   const [errors, setErrors] = useState({});
   const changeHandler = (e) => {
     setAddComments((state) => ({
@@ -58,7 +64,10 @@ export const ProductDetail = () => {
     e.preventDefault();
     commentsService.create(addComments, user.accessToken)
     .then((result) => { 
+      toast.success('Successfully Add Comment!');
       setAddComments({content:""})
+    }).catch((err) => {
+      toast.error(err);
     });
   };
 
@@ -180,9 +189,12 @@ export const ProductDetail = () => {
               </span>
             )}
                 <button
-                  type="submit"
-                  className="btn btn-primary btn-sm"
+                  type="submit"                  
                   disabled={!isFormValid}
+                className={!isFormValid 
+                  ? "disabled btn btn-primary btn-sm" 
+                  : "btn btn-primary btn-sm"
+                }
                 >
                   Submit comment
                 </button>

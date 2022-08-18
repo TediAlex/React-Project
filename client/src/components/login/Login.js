@@ -6,6 +6,8 @@ import { UserContext } from '../../contexts/UserContext';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/forms.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Login = () => {
   const { userLogin } = useContext(UserContext);
@@ -25,20 +27,15 @@ export const Login = () => {
     e.preventDefault();
     userService
       .login(loginData.email, loginData.password)
-      .then((result) => {
-        if (result.code === 403) {
-          setErrors((state) => ({
-            ...state,
-            message: result.message,
-          }));
-        } else {
-          // console.log(result);
+      .then((result) => {       
           userLogin(result);
+          toast.success('Successfully Login!');
           navigate('/');
-          setErrors({})
-        }
+          setErrors({})        
       })
-      .catch(() => {});
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   const validMail = (e) => {
@@ -49,7 +46,9 @@ export const Login = () => {
     }));
   };
 
-  // console.log(errors);
+  const required = loginData.email.length > 0 && loginData.password.length > 0;
+  const isDisabled = required && !Object.values(errors).some((x) => x);
+
   return (
     <div className="signin">
       <div className="back-img">
@@ -94,7 +93,13 @@ export const Login = () => {
             />
           </div>
         </div>
-        <button className="sign-in-btn mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
+        <button 
+        disabled={!isDisabled}
+        className={!isDisabled 
+          ? "disabled sign-in-btn" 
+          : "sign-in-btn"
+        }
+        >
           Sign In
         </button>
       </form>

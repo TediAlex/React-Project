@@ -80,16 +80,17 @@ export const ProductsList = () => {
       </div>
       <div className="container">
         <div className="row">
-          {products.length > 0 &&
-            currentProducts.map((x) => (
+          {products.length > 0 
+          ? currentProducts.map((x) => (
               <ProductsItems
                 key={x._id}
                 title={x.title}
                 category={x.category}
                 imageUrl={x.imageUrl}
                 productId={x._id}
-              />
-            ))}
+              />))
+              : <p>No have products</p>
+            }
         </div>
         <div className="row">
         {products.length > productsPerPage ? (

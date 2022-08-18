@@ -10,8 +10,9 @@ import styles from './MyProfile.module.css';
 import '../../css/forms.css';
 //Import Default
 import { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export const MyProfile = () => {
-  // const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [prodyctsByOwner, setProdyctsByOwner] = useState({});
 
@@ -20,7 +21,10 @@ export const MyProfile = () => {
     productService.getAllOwnerProcucts(user._id)
       .then((result) => {
         setProdyctsByOwner(result);
-      });     
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   }, [user._id]);
   return (
     <div className={styles['profile']} > 

@@ -24,11 +24,21 @@ const request = async (method, url, data) => {
       });
     }
     const response = await buildRequest;
-    console.log(response);
-    const result = await response.json();
-    return result;
+    
+    if (response.ok) {
+      if (response.status === 204) {
+        return;
+      }
+      const result = await response.json();
+      return result;
+    } else {
+      
+      const result = await response.json();
+      throw result.message;
+    }
+    
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 

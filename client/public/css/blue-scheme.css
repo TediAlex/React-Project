@@ -823,6 +823,7 @@ blockquote {
 .project-single .description {
   margin-bottom: 40px;
   margin-top: 40px;
+  text-align: left;
 }
 .project-single .meta-post li {
   display: block;

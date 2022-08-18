@@ -7,6 +7,8 @@ import '../../css/forms.css';
 // Import Default
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const EditProduct = () => {
   const navigate = useNavigate();
@@ -31,11 +33,12 @@ export const EditProduct = () => {
     e.preventDefault();
     productService.editProduct(product._id, user.accessToken,product)
     .then(result => {
+      toast.success('Successfully Edit Yacht!');
       navigate(`/products/${product._id}`);
     })
-      .catch(() => {
-        navigate('/404');
-      });
+    .catch((err) => {
+      toast.error(err);
+    });
   }
   const [errors, setErrors] = useState({});
   const validText = (e, bound) => {
@@ -51,6 +54,7 @@ export const EditProduct = () => {
       [e.target.name]: !imgValidation.test(product[e.target.name]),
     }));
   };
+  const isDisabled = !Object.values(errors).some((x) => x);
 
   return (
     <div className='signin'>
@@ -203,8 +207,12 @@ export const EditProduct = () => {
           </div>
         </div>
         <button
-          className='sign-in-btn mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored'
-            >
+         disabled={!isDisabled}
+         className={!isDisabled 
+           ? "disabled sign-in-btn" 
+           : "sign-in-btn"
+         }
+          >
           Edit Yacht
         </button>
       </form>

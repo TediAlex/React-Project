@@ -4,6 +4,8 @@ import * as commentsService from '../../services/commentsServices';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import moment from 'moment';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CommentItem = ({ comment }) => {
   const { user } = useContext(UserContext);
@@ -32,7 +34,11 @@ export const CommentItem = ({ comment }) => {
       .editComment(editComment._id, user.accessToken, editComment)
       .then((result) => {
         setEditComment(result);
+        toast.success('Successfully Edit Comment!');
         setActive(!isActive);
+      })
+      .catch((err) => {
+        toast.error(err);
       });
   };
   const [errors, setErrors] = useState({});
@@ -51,7 +57,9 @@ export const CommentItem = ({ comment }) => {
     if (confirmation) {
       commentsService
         .remove(editComment._id, user.accessToken)
-        .then((result) => {});
+        .then((result) => {
+          toast.success('Successfully Delete Comment!');
+        });
     }
   };
   return (
@@ -75,7 +83,7 @@ export const CommentItem = ({ comment }) => {
             className="btn btn-primary"
             type="button"
             onClick={editCommentHandler}
-            disabled={!isFormValid}
+            
           >
             Edit Comment
           </button>
@@ -115,7 +123,13 @@ export const CommentItem = ({ comment }) => {
                     Comment should be at least 6 characters long!
                   </span>
                 )}
-                <button type="submit" className="btn btn-primary btn-sm">
+                <button 
+                disabled={!isFormValid}
+                className={!isFormValid 
+                  ? "disabled btn btn-primary btn-sm" 
+                  : "btn btn-primary btn-sm"
+                }
+                type="submit" >
                   Submit comment
                 </button>
               </form>

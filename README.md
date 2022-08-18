@@ -40,7 +40,7 @@ The application is SPA for rent and buy yachts
 * [React v 18.2.0](https://reactjs.org/blog/2022/03/29/react-v18.html)
 * [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 * [react-router-dom v 6.3.0](https://www.npmjs.com/package/react-router-dom)
-* [react-moment] (https://www.npmjs.com/package/react-moment)
+* [react-moment](https://www.npmjs.com/package/react-moment)
 
 # Get started
 

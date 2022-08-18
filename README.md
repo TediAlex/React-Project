@@ -22,8 +22,9 @@ The application is SPA for rent and buy yachts
 * They can create, update or delete their own comments on each products(yachts)
 ![screencapture-localhost-3000-products-88ad391e-eb14-4522-93ab-ecd91d25961d-2022-08-17-22_34_52](https://user-images.githubusercontent.com/21671592/185226928-76886f7d-c264-4f5c-998f-6525de8e284b.png)
 
-
-
+# Contact page
+* Connect to an external API - Google Map
+![screencapture-localhost-3000-contact-2022-08-18-23_10_41](https://user-images.githubusercontent.com/21671592/185485387-5ce347bb-48ac-4bf9-bb85-c64bd7ef5bc9.png)
 
 # Validations / messages
 

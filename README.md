@@ -54,4 +54,4 @@ node .\server.js of server folder
 
 # Deployment
 
-Application is deployed with Firebase:
+Application is deployed with Firebase: https://goalcoach-18466.web.app/

@@ -41,7 +41,7 @@ The application is SPA for rent and buy yachts
 * [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 * [react-router-dom v 6.3.0](https://www.npmjs.com/package/react-router-dom)
 * [react-moment](https://www.npmjs.com/package/react-moment)
-* [react-google-maps/api]https://www.npmjs.com/package/@react-google-maps/api
+* [react-google-maps/api](https://www.npmjs.com/package/@react-google-maps/api)
 
 # Get started
 

@@ -586,8 +586,14 @@ blockquote {
 .products-container {
   padding: 50px 0;
 }
-#filters {
+.contact-map div{
+  margin-bottom 50px
+}
+#filters{
   margin: 100px 0 60px 0;
+}
+.contact {
+  margin-top: 150px;
 }
 #filters li {
   display: inline;
@@ -1313,6 +1319,7 @@ blockquote {
 
 .contact-map {
   margin-top: 30px;
+  margin-bottom: 70px;
 }
 
 .contact-form {

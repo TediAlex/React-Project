@@ -52,7 +52,6 @@ export const Footer = () => {
                       </NavLink>
                     </li>
                     <li>
-                      {' '}
                       <NavLink
                         to="/my-profile"
                         className={({ isActive }) =>
@@ -64,8 +63,9 @@ export const Footer = () => {
                         My Profil
                       </NavLink>
                     </li>
+                   
+                    
                     <li>
-                      {' '}
                       <NavLink
                         to="/logout"
                         className={({ isActive }) =>
@@ -106,6 +106,17 @@ export const Footer = () => {
                     </li>
                   </>
                 )}
+                <li>
+                    <NavLink to="/contact" 
+                         className={({ isActive }) =>
+                         isActive
+                           ? 'active header-menu-link'
+                           : 'inactive header-menu-link'
+                       }
+                        >
+                          Contact Us
+                        </NavLink>
+                    </li>
               </ul>
             </nav>
           </div>

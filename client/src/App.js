@@ -11,6 +11,8 @@ import { EditProduct } from './components/editProduct/EditProduct';
 import { Logout } from './components/logout/Logout';
 import { MyProfile } from './components/my-profile/MyProfile';
 import { PageNotFoundError } from './components/page-not-found/PageNotFoundError';
+import { Contact } from './components/contact/Contact';
+
 // Import Context
 import { UserProvider } from './contexts/UserContext';
 import { ProductContext } from './contexts/ProductContext';
@@ -44,6 +46,7 @@ function App() {
             <Route path="/registration" element={<Registration />} />
             <Route path="/create-product" element={<CreateProduct />} />
             <Route path="/404" element={<PageNotFoundError />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </ProductContext.Provider>
         <ToastContainer />

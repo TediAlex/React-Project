@@ -82,7 +82,7 @@ export const Header = () => {
                       </li>
                     </>
                   ) : (
-                    <>
+                    <>                    
                       <li
                       >
                         <NavLink to="/login" 
@@ -109,6 +109,17 @@ export const Header = () => {
                       </li>
                     </>
                   )}
+                  <li>
+                    <NavLink to="/contact" 
+                         className={({ isActive }) =>
+                         isActive
+                           ? 'active header-menu-link'
+                           : 'inactive header-menu-link'
+                       }
+                        >
+                          Contact Us
+                        </NavLink>
+                    </li>
                 </ul>
               </nav>
             </div>

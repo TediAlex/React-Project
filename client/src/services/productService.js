@@ -38,5 +38,5 @@ export const getByCategory = (category) => {
 };
 
 export const getLastAdded = (category) => {
-  return request.get(`${baseUrl}?sortBy=_createdOn%20`);
+  return request.get(`${baseUrl}?sortBy=_createdOn%20desc`);
 };

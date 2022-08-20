@@ -1362,8 +1362,50 @@
                 "_createdOn": 1617194295474,
             }
         },
-        comments: {
-        
+        products: {
+            "70aed81d-1151-4758-9dbf-f8ac1d6b2bd6": {
+                "_ownerId": "08934c0c-d781-4162-8f7b-fe7f3c98609f",
+                "title": "Lagoon 420 Catamaran",
+                "category": "rent",
+                "price": "320",
+                "imageUrl": "https://www.sailmanyachting.com/cache/com_zoo/images/25_66dd7d5e664530ee00cbae16fefc1e1b.jpg",
+                "description": "An out of the ordinary and luxurious catamaran based in Nikiti, Halkidiki, ready to sail all over North Αegean.\n\nExplore the hidden Greek beauties, anchor in natural bays and Golden sores and live the ultimate sailing experience the way a sailor would.\n\nFour double air conditioned cabins, a spacious living room and a fully equipped kitchen are ready to offer you the holidays you have been dreaming.\nBareboat or skippered charters available. ",
+                "year": "2010",
+                "capacity": "12",
+                "cabins":"4",
+                "engine": "2x Yanmar Diesel 40hp",
+                "isFormValid": false,
+                "_createdOn":"1661020090909"
+            },
+            "70aed81d-1151-4758-9dbf-f8ac1d6b2bd7": {
+                "_ownerId": "08934c0c-d781-4162-8f7b-fe7f3c98609f",
+                "title": "JEANNEAU SUN ODYSSEY 440",
+                "category": "buy",
+                "price": "420000",
+                "imageUrl": "https://www.sailmanyachting.com/cache/com_zoo/images/91f2b5490c0a1757cddcc750e8a8ec12_0a76297ce64b47b288e7e10943c5105e.jpg",
+                "description": "The brand new Sailman yacht reflects harmony on board, and this well-being flows from a clever ergonomic design. An entirely new, innovative layout for greater ease of movement about the boat. Seaworthy and welcoming, cozy and sporty, masculine and feminine, the Sun Odyssey 440 is as attractive on the interior as on the exterior.",
+                "year": "2018",
+                "capacity": "10",
+                "cabins":"3",
+                "engine": "2x Yanmar Diesel 40hp",
+                "isFormValid": false,
+                "_createdOn":"1661020090909"
+            },
+            "70aed81d-1151-4758-9dbf-f8ac1d6b2bd0": {
+                "_ownerId": "08934c0c-d781-4162-8f7b-fe7f3c98609f",
+                "title": "Jeanneau Sun Odyssey 45",
+                "category": "rent",
+                "price": "420",
+                "imageUrl": "https://www.sailmanyachting.com/cache/com_zoo/images/Jeanneau-Sun-Odyssey-45-Exterior-Network-Yacht-04_99e226435b9cff4b7972400e55b55041.jpg",
+                "description": "Elpida is more than just a yacht for charter. It is a name that has been identified with Sailman since the beginning of this journey. Α unique, luxury, and spacious 45 feet sailing yacht based in Nikiti, Halkidiki that never fails to amaze! Integrated equipment in perfect condition for all needs - Full refit 2015'. Bareboat and Skippered Charters available !",
+                "year": "2015",
+                "capacity": "10",
+                "cabins":"3",
+                "engine": "2x Yanmar Diesel 40hp",
+                "isFormValid": false,
+                "_createdOn":"1661020090909"
+            },
+
         }
     };
     var rules$1 = {

@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const CreateProduct = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+ 
   const [newProduct, setNewProduct] = useState({
     title: '',
     category: 'rent',

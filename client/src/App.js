@@ -14,32 +14,28 @@ import { PageNotFoundError } from './components/page-not-found/PageNotFoundError
 import { Contact } from './components/contact/Contact';
 
 // Import Context
-import { UserProvider } from './contexts/UserContext';
-import { ProductContext } from './contexts/ProductContext';
-// Import Setvices
-import { useLocalStorage } from './hook/useLocalStorage';
+import {  UserProvider } from './contexts/UserContext';
+import { ProductProvider } from './contexts/ProductContext';
 // Import Default
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+
 function App() {
-  const [user] = useLocalStorage('auth', {});
-  const [products] = useState([]);
-  console.log(user)
+
   return (
     <div>
       <UserProvider>
         <Header />
-        <ProductContext.Provider value={{ products }}>
+        <ProductProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductsList />} />
             <Route path="/products/:productId" element={<ProductDetail />} />
+            <Route path="/login" element={<Login />} />
             <Route
               path="/products/:productId/edit-product"
               element={<EditProduct />}
             />
-            <Route path="/login" element={<Login />} />
             <Route path="/my-profile" element={<MyProfile />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/registration" element={<Registration />} />
@@ -47,8 +43,9 @@ function App() {
             <Route path="/create-product" element={<CreateProduct />} />
             <Route path="/404" element={<PageNotFoundError />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<PageNotFoundError />} />
           </Routes>
-        </ProductContext.Provider>
+        </ProductProvider>
         <ToastContainer />
         <Footer />
       </UserProvider>

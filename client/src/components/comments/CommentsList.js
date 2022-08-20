@@ -10,8 +10,12 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-export const CommentsList = ({ productId, addComments }) => {
+export const CommentsList = ({
+  productId,
+  addComments,
+  deleteComment,
+  deleteCommentHandler,
+}) => {
   const [comments, setComments] = useState([]);
   const [commentsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,15 +25,16 @@ export const CommentsList = ({ productId, addComments }) => {
   const currentComments = comments.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  console.log(comments);
   useEffect(() => {
-    commentsService.gettAllForProduct(productId).then((result) => {
-      setComments(result);
-    }) 
-    .catch((err) => {
-      toast.error(err);
-    });
-  }, [productId, addComments]);
+    commentsService
+      .gettAllForProduct(productId)
+      .then((result) => {
+        setComments(result);
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  }, [productId, addComments, deleteComment]);
 
   return (
     <>
@@ -37,7 +42,13 @@ export const CommentsList = ({ productId, addComments }) => {
         <div className="row card ">
           {comments &&
             currentComments.map((x) => (
-              <CommentItem productId={productId} key={x._id} comment={x} />
+              <CommentItem
+                productId={productId}
+                key={x._id}
+                comment={x}
+                deleteComment={deleteComment}
+                deleteCommentHandler={deleteCommentHandler}
+              />
             ))}
         </div>
       </div>

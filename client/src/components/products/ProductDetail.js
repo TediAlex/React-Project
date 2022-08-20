@@ -1,12 +1,12 @@
 // Import Components
 import { ProductsItems } from './ProductsItems';
 // import { CommentsAdd } from '../comments/CommentsAdd';
-import { CommentsList} from '../comments/CommentsList';
+import { CommentsList } from '../comments/CommentsList';
 // Import Context
 import { UserContext } from './../../contexts/UserContext';
 // Import Setvices
 import * as productService from './../../services/productService';
-import * as  commentsService from '../../services/commentsServices'
+import * as commentsService from '../../services/commentsServices';
 // Import Default
 import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
@@ -16,22 +16,30 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const ProductDetail = () => {
   const navigate = useNavigate();
+ 
   const { user } = useContext(UserContext);
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [productByOwner, setProductByOwner] = useState([]);
+  
 
   useEffect(() => {
-    productService.getOne(productId).then((result) => {
-      setProduct(result);
-    }).catch((err) => {
-      toast.error(err);
-    });
-    productService.getRelated(user._id, user.accessToken).then((result) => {
-      setProductByOwner(result);
-    }).catch((err) => {
-      toast.error(err);
-    });
+    productService
+      .getOne(productId)
+      .then((result) => {
+        setProduct(result);
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+    productService
+      .getRelated(user._id, user.accessToken)
+      .then((result) => {
+        setProductByOwner(result);
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   }, [productId, user._id, user.accessToken]);
 
   const deleteHandler = () => {
@@ -50,9 +58,9 @@ export const ProductDetail = () => {
   );
   const [addComments, setAddComments] = useState({
     content: '',
-    user: user.email, 
-    product: productId
-  })
+    user: user.email,
+    product: productId,
+  });
   const [errors, setErrors] = useState({});
   const changeHandler = (e) => {
     setAddComments((state) => ({
@@ -62,13 +70,15 @@ export const ProductDetail = () => {
   };
   const submiHandler = (e) => {
     e.preventDefault();
-    commentsService.create(addComments, user.accessToken)
-    .then((result) => { 
-      toast.success('Successfully Add Comment!');
-      setAddComments({content:""})
-    }).catch((err) => {
-      toast.error(err);
-    });
+    commentsService
+      .create(addComments, user.accessToken)
+      .then((result) => {
+        toast.success('Successfully Add Comment!');
+        setAddComments({ content: '' });
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   const requiredField = (e) => {
@@ -77,8 +87,20 @@ export const ProductDetail = () => {
       [e.target.name]: addComments[e.target.name].length < 6,
     }));
   };
-  const isFormValid =  !Object.values(errors).some((x) => x);
- 
+  const isFormValid = !Object.values(errors).some((x) => x);
+  const [deleteComment, setDeleteComment] = useState();
+  const deleteCommentHandler = (commentId, userToken) => {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this comment?'
+    );
+    if (confirmation) {
+      commentsService.remove(commentId, userToken).then((result) => {
+        setDeleteComment(result);
+        toast.success('Successfully Delete Comment!');
+      });
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -162,47 +184,53 @@ export const ProductDetail = () => {
           </div>
         )}
       </div>
-      <CommentsList productId={productId} addComments={addComments}/>
-      <div className='container'>
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div className="shadow-0 border" id="comments">
-            <div className="card-body p-4">
-              <form onSubmit={(e) => submiHandler(e)}>
-                <h5 className="label">Add comment</h5>
-                <p className="form-outline mb-4">
-                  <textarea
-                   type="text"
-                   id="addANote"
-                   className="form-control"
-                   rows={3}
-                   placeholder="Type comment..."
-                   name="content"
-                   value={addComments.content}
-                   onChange={changeHandler}
-                   onBlur={(e) => requiredField(e)}
-                  ></textarea>
-                </p>
-                {errors.content && (
-              <span className="mdl-textfield__error">
-                Comment should be at least 6 characters long!
-              </span>
-            )}
-                <button
-                  type="submit"                  
-                  disabled={!isFormValid}
-                className={!isFormValid 
-                  ? "disabled btn btn-primary btn-sm" 
-                  : "btn btn-primary btn-sm"
-                }
-                >
-                  Submit comment
-                </button>
-              </form>
+      <CommentsList
+        productId={productId}
+        addComments={addComments}
+        deleteComment={deleteComment}
+        deleteCommentHandler={deleteCommentHandler}
+      />
+      <div className="container">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-8 col-lg-6">
+            <div className="shadow-0 border" id="comments">
+              <div className="card-body p-4">
+                <form onSubmit={(e) => submiHandler(e)}>
+                  <h5 className="label">Add comment</h5>
+                  <p className="form-outline mb-4">
+                    <textarea
+                      type="text"
+                      id="addANote"
+                      className="form-control"
+                      rows={3}
+                      placeholder="Type comment..."
+                      name="content"
+                      value={addComments.content}
+                      onChange={changeHandler}
+                      onBlur={(e) => requiredField(e)}
+                    ></textarea>
+                  </p>
+                  {errors.content && (
+                    <span className="mdl-textfield__error">
+                      Comment should be at least 6 characters long!
+                    </span>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={!isFormValid}
+                    className={
+                      !isFormValid
+                        ? 'disabled btn btn-primary btn-sm'
+                        : 'btn btn-primary btn-sm'
+                    }
+                  >
+                    Submit comment
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div> 
       </div>
       <div className="related-projects">
         <div className="container">

@@ -300,8 +300,14 @@ a.menu-toggle-btn i {
   padding: 20px;
   background-color: rgba(49, 55, 58, 0.98);
   display: none;
-  position: relative;
+  position: absolute;
   z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 50%;
+}
+.responsive_menu.active{
+  display: block
 }
 
 /*------------------------------------------------------

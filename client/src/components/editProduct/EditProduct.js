@@ -156,7 +156,7 @@ export const EditProduct = () => {
           </span>
             }
           </div>
-          <p>Add Specifications<span class="optional">*optional</span></p>
+          <p>Add Specifications<span className="optional">*optional</span></p>
           <div
             className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>
             <label htmlFor="year">Year</label>

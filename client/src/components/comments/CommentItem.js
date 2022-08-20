@@ -7,7 +7,7 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const CommentItem = ({ comment }) => {
+export const CommentItem = ({ comment, deleteCommentHandler }) => {
   const { user } = useContext(UserContext);
   const formatCreateDate = moment(comment._createdOn).format(
     'dddd, MMMM DD, YYYY'
@@ -50,18 +50,7 @@ export const CommentItem = ({ comment }) => {
   };
   const isFormValid = !Object.values(errors).some((x) => x);
 
-  const deleteCommentHandler = () => {
-    const confirmation = window.confirm(
-      'Are you sure you want to delete this comment?'
-    );
-    if (confirmation) {
-      commentsService
-        .remove(editComment._id, user.accessToken)
-        .then((result) => {
-          toast.success('Successfully Delete Comment!');
-        });
-    }
-  };
+
   return (
     <div className="card-body">
       <p>{editComment.content}</p>
@@ -83,7 +72,6 @@ export const CommentItem = ({ comment }) => {
             className="btn btn-primary"
             type="button"
             onClick={editCommentHandler}
-            
           >
             Edit Comment
           </button>
@@ -91,7 +79,9 @@ export const CommentItem = ({ comment }) => {
             className="btn btn-primary"
             type="button"
             style={{ float: 'right' }}
-            onClick={deleteCommentHandler}
+            onClick={() =>
+              deleteCommentHandler(editComment._id, user.accessToken)
+            }
           >
             Delete Comment
           </button>
@@ -123,13 +113,15 @@ export const CommentItem = ({ comment }) => {
                     Comment should be at least 6 characters long!
                   </span>
                 )}
-                <button 
-                disabled={!isFormValid}
-                className={!isFormValid 
-                  ? "disabled btn btn-primary btn-sm" 
-                  : "btn btn-primary btn-sm"
-                }
-                type="submit" >
+                <button
+                  disabled={!isFormValid}
+                  className={
+                    !isFormValid
+                      ? 'disabled btn btn-primary btn-sm'
+                      : 'btn btn-primary btn-sm'
+                  }
+                  type="submit"
+                >
                   Submit comment
                 </button>
               </form>
